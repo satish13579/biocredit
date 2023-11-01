@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "biocredit_backend": {
+      "main": "src/biocredit_backend/main.mo",
+      "type": "motoko"
+    },
+    "biocredit_frontend": {
+      "dependencies": [
+        "biocredit_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/biocredit_frontend/src/index.html"
+      },
+      "source": [
+        "src/biocredit_frontend/assets",
+        "dist/biocredit_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
