@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioCredit | Explorer</title>
+    <link
+      href="{{url_for('static',filename='5.3.1_dist_css_bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <script src="{{url_for('static',filename='5.3.1_dist_js_bootstrap.bundle.min.js')}}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/explorer.css')}}"
+    />
+    <script src="{{url_for('static',filename='jquery-3.7.0.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='html5-qrcode.min.js')}}"></script>
+    <link
+  href="{{url_for('static',filename='dataTables.min.css')}}"
+  rel="stylesheet"
+/>
+<script src="{{url_for('static',filename='dataTables.min.js')}}"></script>
+    <script
+      src="https://kit.fontawesome.com/a4e89c7158.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="prel" class="preloader">
+      <svg
+        xml:space="preserve"
+        style="height: 50%; width: 50%"
+        viewBox="0 0 128 128"
+        y="0px"
+        x="0px"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg"
+        id="圖層_1"
+        version="1.1"
+        width="200px"
+        height="200px"
+      >
+        <g
+          class="ldl-scale"
+          style="
+            transform-origin: 50% 50%;
+            transform: rotate(0deg) scale(0.8, 0.8);
+          "
+        >
+          <g
+            class="ldl-ani"
+            style="
+              transform-origin: 64px 64px;
+              transform: translate(0px, 0px);
+              animation: 1.11111s linear 0s infinite normal forwards running
+                jump-39f07977-142e-4f9c-a589-7b3a5b286ba3;
+            "
+          >
+            <style type="text/css">
+              .st0 {
+                fill: none;
+              }
+              .st1 {
+                fill: #abbd81;
+                stroke: #333;
+                stroke-width: 3.5;
+                stroke-linecap: round;
+                stroke-miterlimit: 10;
+              }
+              .st2 {
+                fill: #333;
+              }
+            </style>
+            <g class="ldl-layer">
+              <g class="ldl-ani" style="transform-origin: 64px 64px">
+                <path d="z" class="st0"></path>
+              </g>
+            </g>
+            <g class="ldl-layer">
+              <g class="ldl-ani">
+                <g>
+                  <g class="ldl-layer">
+                    <g class="ldl-ani" style="transform-origin: 64px 64px">
+                      <path
+                        d="M93.8,67.3c-10.9,20.9-33,25.5-44.5,19.1c-21.4-12-17.2-37.2,0-42.2c37.6-11,39.4-32,39.4-32 S111,34.2,93.8,67.3z"
+                        class="st1"
+                        style="fill: rgb(1, 254, 52); stroke: rgb(21, 153, 48)"
+                      ></path>
+                    </g>
+                  </g>
+                  <g class="ldl-layer">
+                    <g class="ldl-ani">
+                      <g>
+                        <g class="ldl-layer">
+                          <g
+                            class="ldl-ani"
+                            style="transform-origin: 64px 64px"
+                          >
+                            <path
+                              d="M90.2,31.6c-0.8,4.9-1.9,9.6-4,14.2c-2,4.6-5,8.8-8.4,12.5c-7,7.4-15.6,12.5-24.2,17.4l-6.4,3.6 c-2.2,1.3-4.1,2.2-5.9,3.3c-3.6,2.3-6.5,4.9-8.2,8.1c-1.8,3.2-2.2,7.2-1.4,11.5c0.8,4.4,2.4,8.8,4.5,13.2c0.1,0.3,0,0.5-0.3,0.6 c-0.1,0.1-0.4,0-0.5,0c-4.1-3.1-7.3-7-9.6-11.9c-1.2-2.4-1.9-5.1-2-8.1c-0.3-2.8,0.1-5.9,1.3-8.8c1-2.8,2.8-5.4,4.7-7.4 c1-1,2-1.9,3.2-2.8l3.5-2.3c2.3-1.3,4.9-2.3,7-3.1c2.2-0.9,4.5-1.7,6.7-2.7c4.4-1.9,8.6-4,12.7-6.3c4.1-2.3,8.1-4.7,11.5-7.8 C78,52,81,48.5,83.5,44.4c2.4-4,4.2-8.4,5.6-13.1c0.1-0.3,0.4-0.4,0.5-0.3C90.1,31.2,90.2,31.4,90.2,31.6z"
+                              class="st2"
+                              style="fill: rgb(21, 153, 48)"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g class="ldl-layer">
+              <g class="ldl-ani" style="transform-origin: 64px 64px">
+                <path d="z" class="st0"></path>
+              </g>
+            </g>
+            <metadata xmlns:d="https://loading.io/stock/">
+              <d:name>leaf</d:name>
+              <d:license>by</d:license>
+              <d:slug>yycrha</d:slug>
+            </metadata>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <script>
+      $(window).on("load", function () {
+        document.getElementById("prel").classList.add("off");
+        document
+          .getElementById("prel")
+          .addEventListener("animationend", function (e) {
+            document.getElementById("prel").style.width = "0%";
+            document.getElementById("prel").style.height = "0%";
+          });
+        document.querySelector("body").style.overflow = "visible";
+      });
+    </script>
+    <!--Pre Loader ends here-->
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>
+            BioCredit <i class="fa-solid fa-leaf" style="color: #00fe43"></i>
+          </h1>
+        </div>
+        <div class="menu">
+          <ul>
+            <li>
+              <a href="/#home" id="Home" class="" onclick="Home(this)"
+                >Home</a
+              >
+            </li>
+
+            <li>
+              <a href="/#about" id="About" onclick="Home(this)">About</a>
+            </li>
+
+            <li>
+              <a class='active'
+                href="{{ url_for('views.explorer')}}"
+                id="Explore"
+                onclick="Home(this)"
+                >Explorer&nbsp;<i
+                  class="fa-solid fa-arrow-up-right-from-square"
+                  style="color: #ffffff"
+                ></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="register">
+          <a
+            id="qropen"
+            type="button"
+            class="btn btn-light"
+            data-bs-toggle="modal"
+            data-bs-target="#qrmodal"
+          >
+            <i class="fa-solid fa-qrcode"></i>
+          </a>
+          <a href="{{ url_for('auth.login') }}" class="btn btn-light">Login</a>
+          <a href="{{ url_for('auth.register') }}" class="register-btn"
+            >Register</a
+          >
+        </div>
+        <div class="hamburger-menu">
+          <button id="fa" style="background-color: transparent; border: none">
+            <i class="fa-solid fa-bars fa-xl" style="color: #ffffff"></i>
+          </button>
+          <button
+            id="fa-cross"
+            style="background-color: transparent; border: none; display: none"
+          >
+            <i class="fa-solid fa-xmark fa-xl" style="color: #ffffff"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <!-- Nav Bar ends -->
+    <div id="overlay"></div>
+    <!-- off canvas starts here -->
+    <div class="off-canvas" id="offcanvas">
+      <h2>BioCredit <i class="fa-solid fa-leaf" style="color: #00fe43"></i></h2>
+      <hr style="opacity: 1;display: block;unicode-bidi: isolate;margin-block-start: 0.5em;margin-block-end: 0.5em;margin-inline-start: auto;margin-inline-end: auto;overflow: hidden;border-style: inset;border-width: 1px;" />
+      <ul>
+        <a onclick="closeCanvas();" href="/#home"><i class="fa-solid fa-house" style="margin-right:6px;"></i> Home</a>
+        <a onclick="closeCanvas();" href="{{ url_for('views.explorer')}}"><i class="fa-solid fa-arrow-up-right-from-square" style="margin-right:8px;"></i>Explorer</a>
+        <a onclick="closeCanvas();" href="/#about"><i class="fa-solid fa-circle-info" style="margin-right:6px;"></i> About</a>
+        <a
+          id="qropen2"
+          type="button"
+          href='#'
+          onclick="closeCanvas()"
+          data-bs-toggle="modal"
+          data-bs-target="#qrmodal"
+        >
+          <i class="fa-solid fa-qrcode" style="margin-right:6px;"></i> QR Scanner
+        </a>
+      </ul>
+      <button
+        onclick="location.href='{{ url_for('auth.login')}}';"
+        class="login-btn"
+      >
+        <a href="{{ url_for('auth.login')}}">Login</a></button
+      ><br />
+      <button
+        onclick="location.href='{{url_for('auth.register')}}';"
+        class="register-btn"
+      >
+        <a href="{{url_for('auth.register')}}">Register</a>
+      </button>
+    </div>
+
+    <div class="first">
+      <div class="total-hashes">
+        <!--<div class="total-credits">
+          <h5>Total Cabon Credits</h5>
+          <hr />
+        </div> -->
+        <div class="sub-first">
+          <div class="one">
+            <h4>Last 24 hrs</h4>
+            <hr />
+            <p>{{last_one_day_count}} Readings</p>
+          </div>
+          <div class="two">
+            <h4>Last 28 Days</h4>
+            <hr />
+            <p>{{last_twenty_eight_days_count}} Readings</p>
+          </div>
+          <div class="three">
+            <h4>Average Readings Per Day</h4>
+            <hr />
+            <p>{{one_day_avg}} Readings</p>
+          </div>
+          <div class="four">
+            <h4>Average Readings Per Month</h4>
+            <hr />
+            <p>{{month_avg}} Readings</p>
+          </div>
+        </div>
+      </div>
+      <div class="graph">
+        <h5>Interacting With Data Hashing API</h5>
+        <hr />
+        <div class="api-wrapper">
+          <h3 id='apimsg'>Click The Below Button To Begin Data Hashing & Uploading to Algorand Blockchain</h3>
+          <button id="apicall">Create Impact</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var apicall = document.getElementById('apicall');
+      apicall.addEventListener('click',function(e){
+        apicall.innerHTML=`Create Impact <i class="fa-solid fa-spinner fa-spin"></i>`;
+        apicall.disabled=true;
+        $.ajax({
+          url:"{{BASE_URL}}send_hash",
+          type:"GET",
+          success:function(data){
+            if(data.statusCode===200){
+              $('#apimsg').html(data.msg);
+              apicall.style.display='none';
+            }
+            else{
+              $('#apimsg').html(data.msg);
+              apicall.innerHTML=`Create Impact`;
+              apicall.disabled=false;
+            }
+          }
+        });
+      });
+    </script>
+
+    <div class="second">
+      <div class="totalhashes">
+        <h5>Latest Day Hashes</h5>
+        
+        <hr /><style>
+          .dataTables_wrapper{
+            margin-top:25px;
+            z-index:0;
+          }
+          td,th{
+            border:1px solid;
+          }
+          #latest_readings,#previous_hashes{
+            padding-top:12px;
+          }
+        </style><table id="previous_hashes">
+          <thead>
+            <th>S.No</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {% for row in previous_hashes.keys() %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ convertD(row) }}</td>
+        <td><a target='_blank' style="color:#01FE43;" href="https://ipfs.io/ipfs/{{previous_hashes[row]['CurrentCid']}}">View Hashes</a></td>
+    </tr>
+    {% endfor %}
+          </tbody>
+        </table>
+      </div>
+        <div class="updated-locations">
+          <h5>Latest Meter Readings</h5>
+          <hr />
+          <style>
+            .dataTables_wrapper{
+              margin-top:25px;
+              z-index:0;
+            }
+            td,th{
+              border:1px solid;
+            }
+            #latest_readings{
+              padding-top:12px;
+            }
+          </style>
+          <div class="table-responsive">
+            <table id="latest_readings">
+              <thead>
+                <th>S.No</th>
+                <th>Username</th>
+                <th>Timestamp</th>
+                <th>Reading</th>
+                <th>Actions</th>
+              </thead>
+              <tbody>
+                {% for row in latest_readings %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ row['username'] }}</td>
+            <td>{{ convertDate(row['timestamp']) }}</td>
+            <td>{{ row['meter_reading'] }}</td>
+            <td><a target='_blank' style="color:#01FE43;" href="{{BASE_URL}}view_mimage?date={{row['date']}}&username={{row['username']}}">View Image</a></td>
+        </tr>
+        {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+        
+      <script>
+        $(document).ready( function () {
+    $('#latest_readings').DataTable({
+        columnDefs: [{ orderable: false, targets: 4 }],
+        order: [[0, "asc"]]
+    });
+    $('#previous_hashes').DataTable({
+      columnDefs: [{ orderable: false, targets: 2 }],
+      order: [[0, "asc"]]
+  });
+  } );
+    </script>
+      <!-- modal-->
+      <div
+        class="modal fade"
+        id="qrmodal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable"
+        >
+          <div class="modal-content" style="background-color: #000">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Scan QR</h1>
+              <button
+                type="button btn btn-light"
+                id="qrclose"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div style="margin:auto;" id="reader"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        All Rights Reserved - &copy;&nbsp; BioCredit<i
+          class="fa-solid fa-leaf fa-sm"
+          style="color: #00fe43"
+        ></i>
+      </div>
+    </footer>
+    <!--  QR code starts -->
+
+    <script>
+      let html5QrcodeScanner;
+      function onScanSuccess(decodedText, decodedResult) {
+        console.log(`Scan result: ${decodedText}`, decodedResult);
+
+        if (isValidURL(decodedText)) {
+          window.open(decodedText, "_blank");
+        } else {
+          console.log("Not a valid URL:", decodedText);
+        }
+
+        $("#qrmodal").modal("hide");
+
+        html5QrcodeScanner.clear();
+      }
+
+      function isValidURL(url) {
+        // Regular expression to match most types of URLs, including localhost
+        const pattern =
+          /^(https?|ftp|file):\/\/(localhost|127\.0\.0\.1|[a-z0-9-]+(\.[a-z0-9-]+)*)(:\d{1,5})?(\/\S*)?$/i;
+        return pattern.test(url);
+      }
+
+      $("#qropen").on("click", function (e) {
+        html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+          fps: 10,
+          qrbox: 250,
+        });
+
+        html5QrcodeScanner.render(onScanSuccess);
+      });
+
+      $("#qropen2").on("click", function (e) {
+        html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+          fps: 10,
+          qrbox: 250,
+        });
+
+        html5QrcodeScanner.render(onScanSuccess);
+      });
+
+      let modal=document.getElementById('qrmodal');
+      modal.addEventListener('hide.bs.modal', event =>{
+        if (html5QrcodeScanner) {
+          html5QrcodeScanner.clear();
+        }
+      });
+    </script>
+    <!--Qr code ends here-->
+
+    <script>
+      function Home(x) {
+        document.getElementById("Home").classList.remove("active");
+        document.getElementById("Explore").classList.remove("active");
+        document.getElementById("About").classList.remove("active");
+        x.classList.add("active");
+      }
+
+      // function OffCanvas() {
+      //   document.getElementById("offcanvas").classList.add("active");
+      //   document.getElementById("fa").style.display = "none";
+      //   document.getElementById("fa-cross").style.display = "block";
+      // }
+
+      // function OffCanvasClose() {
+      //   document.getElementById("offcanvas").style.display = "none";
+      //   document.getElementById("fa").style.display = "block";
+      //   document.getElementById("fa-cross").style.display = "none";
+      // }
+
+      // document.addEventListener("click", function (e) {
+      //   console.log(e.target.id);
+
+      //   if (e.target.id === "fa") {
+      //     console.log("open");
+      //     OffCanvas();
+      //     return;
+      //   } else if (e.target.id !== "offcanvas") {
+      //   }
+      //   OffCanvasClose();
+      // });
+
+      const overlay = document.querySelector("#overlay");
+      const mainNav = document.querySelector("#offcanvas");
+      const navToggle = document.querySelector("#fa");
+      const navClose = document.querySelector("#fa-cross");
+
+      function closeCanvas() {
+        navClose.style.display = "none";
+        navToggle.style.display = "block";
+        if (mainNav.classList.contains("is-active")) {
+          mainNav.classList.remove("is-active");
+        }
+        if (overlay.classList.contains("is-active"))
+          overlay.classList.remove("is-active");
+      }
+
+      navToggle.addEventListener("click", () => {
+        navClose.style.display = "block";
+        navToggle.style.display = "none";
+        if (!mainNav.classList.contains("is-active")) {
+          mainNav.classList.add("is-active");
+        }
+        if (!overlay.classList.contains("is-active"))
+          overlay.classList.add("is-active");
+      });
+      navClose.addEventListener("click", () => {
+        navClose.style.display = "none";
+        navToggle.style.display = "block";
+        if (mainNav.classList.contains("is-active")) {
+          mainNav.classList.remove("is-active");
+        }
+        if (overlay.classList.contains("is-active"))
+          overlay.classList.remove("is-active");
+      });
+
+      overlay.addEventListener("click", () => {
+        if (mainNav.classList.contains("is-active"))
+          mainNav.classList.remove("is-active");
+        if (overlay.classList.contains("is-active"))
+          overlay.classList.remove("is-active");
+        navClose.style.display = "none";
+        navToggle.style.display = "block";
+      });
+    </script>
+  </body>
+</html>

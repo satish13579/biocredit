@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block title %}Login | BioCredit &#128594;{% endblock %} {% block
+content%}
+<div style="margin-top: 20px; margin-left: 20px">
+  <a class="back-btn1" href="{{ url_for('views.home')}}"
+    ><i class="fa-solid fa-chevron-left" style="color: #00fe43"></i
+    >&nbsp;Back</a
+  >
+</div>
+<div class="container1">
+  <div class="login-box">
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+      <div class="user-box">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          autocomplete="off"
+          required=""
+        />
+        <label for="username">Username : </label>
+      </div>
+      <div class="user-box">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          autocomplete="off"
+          required=""
+        />
+        <label for="password">Password : </label>
+      </div>
+      <button type="submit" class="login-btn1">Login</button>
+    </form>
+  </div>
+</div>
+<div
+  id="contoast"
+  data-count="0"
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+></div>
+<script>
+
+    function createtoast(msg) {
+      var count = parseInt($("#contoast").attr("data-count"));
+      var toast =`<div id="liveToast` +count +`" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div style="background-color: #FFFFFF;color:#000000;" class="toast-header">  <img src="data:image/png;base64,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
+        " style="height:20px;width:auto;" class="rounded me-2" alt="...">  <strong class="me-auto" style="color:black;">>></strong>  <small style="color:black;margin-right:8px;">Just Now</small>  <button style="margin:0px!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div id='bo` +count +`' style="background-color: BLACK;COLOR: #01FE43;BORDER: 1PX SOLID;" class="toast-body">              </div>        </div>`;
+      // var mtoast =`<div id="mliveToast` +count +`" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true">          <div style="background-color: #000000;color:#ffffff;" class="toast-header">            <img src="data:image/png;base64,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
+        // " style="height:20px;width:auto;" class="rounded me-2" alt="...">            <strong class="me-auto">>></strong>            <small>Just Now</small>            <button style="color:while!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>          </div>          <div id='mbo` +count +`' class="toast-body">              </div>        </div>`;
+      $("#contoast").html($("#contoast").html() + toast);
+      // $("#mcontoast").html($("#mcontoast").html() + mtoast);
+      bo = document.getElementById("bo" + count);
+      bo.innerHTML = msg;
+      // mbo = document.getElementById("mbo" + count);
+      // mbo.innerHTML = msg;
+      $("#liveToast" + count).addClass("fade show");
+      // $("#mliveToast" + count).addClass("fade show");
+      count++;
+      $("#contoast").attr("data-count", count);
+      count--;
+      setTimeout(function (e) {
+        $("#liveToast" + count).toast("hide");
+      }, 8000);
+      // setTimeout(function (e) {
+      //   $("#mliveToast" + count).toast("hide");
+      // }, 8000);
+    }
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %}
+    // Loop through the flashed messages and display them
+    {% for category, message in messages %}
+    createtoast('{{ message }}');
+    {% endfor %}
+  {% endif %} {% endwith %}
+</script>
+{% endblock %}

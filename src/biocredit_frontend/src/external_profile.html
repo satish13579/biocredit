@@ -1,0 +1,148 @@
+{% extends base %} {% block title %} User Profile | BioCredit &#128594; {%
+endblock title %} {% block content%}
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGNsuw4kc63tho_qEVBWP0DLmunaSjzoU&callback=initMap&libraries=&v=weekly"
+  async
+></script>
+<div class="main-profile">
+  <div class="user-details">
+    <div class="user-profile">
+      <div class="user-image">
+        <picture>
+          <img
+            src="{{ url_for('static', filename='images/user-icon.png') }}"
+            alt="Profile-picture"
+            width="100px"
+          />
+        </picture>
+      </div>
+      <div class="user-general-details">
+        <p><strong>User Name :</strong> &nbsp; {{current_user['username']}}</p>
+        <p><strong>Name :</strong> &nbsp; {{current_user['name']}}</p>
+        <p><strong>Address :</strong> &nbsp; {{current_user['address']}}</p>
+        <p>
+          <strong>Meter Location :</strong> &nbsp; {{current_user['latitude']}},
+          {{current_user['longitude']}}
+        </p>
+      </div>
+    </div>
+    <div class="user-qr">
+      <img src="{{qrcode.svg_data_uri(dark='#01fe34',light="#000000",
+      scale=4)}}" alt="User-QR">
+    </div>
+  </div>
+  
+  <div id="mapdiv" class="user-location"></div>
+  <script>
+
+    // Initialize and add the map
+    function initMap() {
+
+        // The location coordinates
+        const coordinates = {
+            lat: {{current_user['latitude']}},
+            lng: {{current_user['longitude']}}
+        };
+
+        // Create the map, centered at location coordinates
+        const map = new google.maps.Map(
+                document.getElementById("mapdiv"), {
+
+            // Set the zoom of the map
+            zoom: 15,
+            center: coordinates,
+        });
+
+        const marker = new google.maps.Marker({
+          position: coordinates,
+          map,
+          title: "{{current_user['username']}}'s Meter Location",
+        });
+
+        let infowindow = new google.maps.InfoWindow({
+          content: "<b>{{current_user['username']}}'s Meter Location</b>"
+        });
+
+        google.maps.event.addListener(marker, "click", function() {
+          console.log(infowindow);
+          //infowindow.open(map,marker);
+          if(infowindow.anchor===undefined){
+            infowindow.open(map,marker);
+
+          }else{
+            infowindow.close();
+            infowindow = new google.maps.InfoWindow({
+              content: "<b>{{current_user['username']}}'s Meter Location</b>"
+            });
+          }
+          console.log(infowindow);
+
+        });
+    }
+  </script>
+  <link
+    href="{{url_for('static',filename='dataTables.min.css')}}"
+    rel="stylesheet"
+  />
+  <script src="{{url_for('static',filename='dataTables.min.js')}}"></script>
+  <div class="container table-responsive">
+    <h3>Past readings</h3>
+    <table id="example" class="display" style="width: 100%">
+      <thead>
+        <tr>
+          {{th|safe}}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          {{th|safe}}
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $("#example").dataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+          url: "{% if role!='user' %}{{url_for('views.modReadings')}}{% else %}{{url_for('views.userReadings')}}{% endif %}",
+          data: function (d) {
+            d.username = "{{current_user['username']}}";
+          },
+        },
+        {% if role!='user' %}
+        columns: [
+          { data: "sno" },
+          { data: "date" },
+          { data: "username" },
+          { data: "reading" },
+          { data: "action",
+        render: function(data,type,row){
+          return `<a target='_blank' href='{{BASE_URL}}view_mimage?date=`+data+`&username=`+row.username+`'>View Image</a>`;
+        }
+        },
+        ],
+        columnDefs: [{ orderable: false, targets: 0 },{ orderable: false, targets: 4 }],
+        order: [[1, "asc"]]
+        {% else %}
+        columns: [
+        { data: "sno" },
+        { data: "date" },
+        { data: "reading" },
+        { data: "submitted_by" },
+        { data: "action",
+      render: function(data,type,row){
+        return `<a target='_blank' href='{{BASE_URL}}view_mimage?date=`+data+`&username={{current_user['username']}}'>View Image</a>`;
+      }
+      },
+      ],
+      columnDefs: [{ orderable: false, targets: 0 },{ orderable: false, targets: 4 }],
+      order: [[1, "asc"]]
+        {% endif %}
+  
+      });
+    });
+  </script>
+</div>
+{% endblock content %}

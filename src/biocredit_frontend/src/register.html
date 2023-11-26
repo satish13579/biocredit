@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | BioCredit &#128594;</title>
+
+  <script src="jquery-3.7.0.min.js"></script>
+  <script src="fontawesome_all.min.js"></script>
+
+  <link href="5.3.1_dist_css_bootstrap.min.css" rel="stylesheet" />
+  <script src="5.3.1_dist_js_bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="font-awesome_6.4.2_css_all.min.css" />
+</head>
+
+<body style="overflow:hidden;">
+  <div id="prel" class="preloader">
+    <svg xml:space="preserve" style="height: 50%; width: 50%;" viewBox="0 0 128 128" y="0px" x="0px"
+      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="圖層_1" version="1.1"
+      width="200px" height="200px">
+      <g class="ldl-scale" style="transform-origin: 50% 50%;transform: rotate(0deg) scale(0.8, 0.8);">
+        <g class="ldl-ani"
+          style="transform-origin: 64px 64px;transform: translate(0px, 0px);animation: 1.11111s linear 0s infinite normal forwards running jump-39f07977-142e-4f9c-a589-7b3a5b286ba3;">
+          <style type="text/css">
+            .st0 {
+              fill: none
+            }
+
+            .st1 {
+              fill: #abbd81;
+              stroke: #333;
+              stroke-width: 3.5;
+              stroke-linecap: round;
+              stroke-miterlimit: 10
+            }
+
+            .st2 {
+              fill: #333
+            }
+          </style>
+          <g class="ldl-layer">
+            <g class="ldl-ani" style="transform-origin: 64px 64px;">
+              <path d="z" class="st0"></path>
+            </g>
+          </g>
+          <g class="ldl-layer">
+            <g class="ldl-ani">
+              <g>
+                <g class="ldl-layer">
+                  <g class="ldl-ani" style="transform-origin: 64px 64px;">
+                    <path
+                      d="M93.8,67.3c-10.9,20.9-33,25.5-44.5,19.1c-21.4-12-17.2-37.2,0-42.2c37.6-11,39.4-32,39.4-32 S111,34.2,93.8,67.3z"
+                      class="st1" style="fill: rgb(1, 254, 52); stroke: rgb(21, 153, 48);"></path>
+                  </g>
+                </g>
+                <g class="ldl-layer">
+                  <g class="ldl-ani">
+                    <g>
+                      <g class="ldl-layer">
+                        <g class="ldl-ani" style="transform-origin: 64px 64px;">
+                          <path
+                            d="M90.2,31.6c-0.8,4.9-1.9,9.6-4,14.2c-2,4.6-5,8.8-8.4,12.5c-7,7.4-15.6,12.5-24.2,17.4l-6.4,3.6 c-2.2,1.3-4.1,2.2-5.9,3.3c-3.6,2.3-6.5,4.9-8.2,8.1c-1.8,3.2-2.2,7.2-1.4,11.5c0.8,4.4,2.4,8.8,4.5,13.2c0.1,0.3,0,0.5-0.3,0.6 c-0.1,0.1-0.4,0-0.5,0c-4.1-3.1-7.3-7-9.6-11.9c-1.2-2.4-1.9-5.1-2-8.1c-0.3-2.8,0.1-5.9,1.3-8.8c1-2.8,2.8-5.4,4.7-7.4 c1-1,2-1.9,3.2-2.8l3.5-2.3c2.3-1.3,4.9-2.3,7-3.1c2.2-0.9,4.5-1.7,6.7-2.7c4.4-1.9,8.6-4,12.7-6.3c4.1-2.3,8.1-4.7,11.5-7.8 C78,52,81,48.5,83.5,44.4c2.4-4,4.2-8.4,5.6-13.1c0.1-0.3,0.4-0.4,0.5-0.3C90.1,31.2,90.2,31.4,90.2,31.6z"
+                            class="st2" style="fill: rgb(21, 153, 48);"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g class="ldl-layer">
+            <g class="ldl-ani" style="transform-origin: 64px 64px;">
+              <path d="z" class="st0"></path>
+            </g>
+          </g>
+          <metadata xmlns:d="https://loading.io/stock/">
+            <d:name>leaf</d:name>
+            <d:tags>leaf,plant,leaves,tree,bud,burgreen,shoot,sprout,stem,grow,newbie,tender</d:tags>
+            <d:license>by</d:license>
+            <d:slug>yycrha</d:slug>
+          </metadata>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+</body>
+
+</html>
+
+<div class="extra"></div>
+<div style="margin-top: -20px; margin-bottom: 20px; margin-left: 20px">
+  <a class="back-btn1" href="{{ url_for('views.home')}}"><i class="fa-solid fa-chevron-left"
+      style="color: #00fe43"></i>&nbsp;Back</a>
+</div>
+
+<div class="container-1">
+  <div class="register-box">
+    <h2>Registration</h2>
+    <form id="reg_form">
+      <div class="user-box">
+        <input id="name" type="text" name="name" required autocomplete="off" />
+        <label>Name :</label>
+      </div>
+      <div class="user-box">
+        <input id="address" type="text" name="address" required autocomplete="off" />
+        <label>Address :</label>
+      </div>
+      <input type="hidden" id="lat" name="latitude" required />
+      <input type="hidden" id="long" name="longitude" required />
+      <input type="hidden" id="acc" name="accuracy" required />
+      <div class="user-box">
+        <select id="address">
+          <option value="">Select Role</option>
+          <option value="NormalUser">Normal User</option>
+          <option value="SuperUser">Super User</option>
+        </select>
+        <label>Role :</label>
+      </div>
+      <span id="status" data-status style="display: none"></span>
+      <div class="user-box" id="check-box">
+        <input type="checkbox" id="check" name="accept" required="" />
+        <p>
+          As we are capturing your Meter Location, Register Your Account While
+          Standing near the Biogas Meter & Accept Geolocation Permission
+        </p>
+      </div>
+
+      <button id="org-submit" type="submit" style="display: none" class="register-btn">
+        Register
+      </button>
+    </form>
+    <button id="submit-btn" disabled>Register</button>
+  </div>
+</div>
+<div id="contoast" data-count="0" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+  function createtoast(msg) {
+    var count = parseInt($("#contoast").attr("data-count"));
+    var toast = `<div id="liveToast` + count + `" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div style="background-color: #FFFFFF;color:#000000;" class="toast-header">  <img src="data:image/png;base64,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
+        " style="height:20px;width:auto;" class="rounded me-2" alt="...">  <strong class="me-auto" style="color:black;">>></strong>  <small style="color:black;margin-right:8px;">Just Now</small>  <button style="margin:0px!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div id='bo` + count + `' style="background-color: BLACK;COLOR: #01FE43;BORDER: 1PX SOLID;" class="toast-body">              </div>        </div>`;
+    // var mtoast =`<div id="mliveToast` +count +`" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true">          <div style="background-color: #000000;color:#ffffff;" class="toast-header">            <img src="data:image/png;base64,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
+    // " style="height:20px;width:auto;" class="rounded me-2" alt="...">            <strong class="me-auto">>></strong>            <small>Just Now</small>            <button style="color:while!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>          </div>          <div id='mbo` +count +`' class="toast-body">              </div>        </div>`;
+    $("#contoast").html($("#contoast").html() + toast);
+    // $("#mcontoast").html($("#mcontoast").html() + mtoast);
+    bo = document.getElementById("bo" + count);
+    bo.innerHTML = msg;
+    // mbo = document.getElementById("mbo" + count);
+    // mbo.innerHTML = msg;
+    $("#liveToast" + count).addClass("fade show");
+    // $("#mliveToast" + count).addClass("fade show");
+    count++;
+    $("#contoast").attr("data-count", count);
+    count--;
+    setTimeout(function (e) {
+      $("#liveToast" + count).toast("hide");
+    }, 8000);
+    // setTimeout(function (e) {
+    //   $("#mliveToast" + count).toast("hide");
+    // }, 8000);
+  }
+
+  var role = document.getElementById("user_role");
+  var submitbtn = document.getElementById("submit-btn");
+
+  role.value = "user";
+
+  $(document).ready(() => {
+    var check = document.getElementById("check");
+    check.addEventListener("change", function (event) {
+      if (event.target.checked === true) {
+        $("#submit-btn").prop("disabled", false);
+      } else {
+        $("#submit-btn").prop("disabled", true);
+      }
+    });
+    watchLocation();
+
+    async function checkLocationPermission() {
+      try {
+        const permissionStatus = await navigator.permissions.query({ name: 'geolocation' });
+
+        if (permissionStatus.state === 'granted') {
+          console.log('Location permission granted');
+        } else if (permissionStatus.state === 'prompt') {
+          createtoast('Allow above Location permission prompt to Continue.!!');
+        } else if (permissionStatus.state === 'denied') {
+          createtoast('Allow Location Permission to Continue.!!');
+        }
+      } catch (error) {
+        console.error('Error checking location permission:', error);
+      }
+    }
+    checkLocationPermission();
+  });
+
+  submitbtn.addEventListener("click", async function (event) {
+    var form = document.getElementById("reg-form");
+    if (!form.checkValidity()) {
+      var resetsbtn = document.getElementById("org-submit");
+      resetsbtn.click();
+    } else {
+      var latitude = $("#lat").val();
+      var longitude = $("#long").val();
+      var accuracy = $('#acc').val();
+      if (latitude !== "" && longitude !== "" && accuracy !== "") {
+        var resetsbtn = document.getElementById("org-submit");
+        resetsbtn.click();
+      } else {
+        createtoast($('#status').val());
+        //await getLocationAsync().catch((error) => {
+        //  createtoast(error);
+        //}); // Wait for getLocationAsync to complete
+      }
+    }
+  });
+
+  let watch;
+
+  function watchLocation() {
+    watch = navigator.geolocation.watchPosition(HandlePosition, HandleError, { maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
+  }
+
+  function closeWatchLocation() {
+    navigator.geolocation.clearWatch(watch);
+  }
+
+  function HandlePosition(position) {
+    console.log(position.coords);
+    if (position.coords.accuracy <= 200) {
+      $("#lat").val(position.coords.latitude);
+      $("#long").val(position.coords.longitude);
+      $("#acc").val(position.coords.accuracy);
+      $('#status').val('success');
+      closeWatchLocation();
+      createtoast("Location Captured Successfully.!!");
+    }
+    else {
+      $('#status').val('Finding Accurate Location, Please Wait.!!');
+    }
+  }
+
+  function HandleError(error) {
+    let reason = '';
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        reason = "Please Allow the Location Permission to Continue.!!";
+        createtoast(reason)
+        break;
+      case error.POSITION_UNAVAILABLE:
+        reason = "Location information is unavailable to Continue.!!";
+        break;
+      case error.TIMEOUT:
+        reason = "The request to get user location timed out,\nPlease Try Again.!!";
+        break;
+      case error.UNKNOWN_ERROR:
+        reason = "An unknown error occurred.";
+        break;
+    }
+    $('#status').val(reason);
+  }
+
+  async function getLocationAsync() {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            if (position.coords.accuracy <= 200) {
+              $("#lat").val(position.coords.latitude);
+              $("#long").val(position.coords.longitude);
+              $("#acc").val(position.coords.accuracy);
+              var resetsbtn = document.getElementById("org-submit");
+              resetsbtn.click();
+              resolve();
+            } else {
+              reject(
+                "Your Location Accuracy is " + position.coords.accuracy + " meters\n Please Make your Location accurate less than 200 meters.!!"
+              );
+            }
+          },
+          (error) => {
+            let reason;
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                reason = "Please Allow the Location Permission to Continue.!!";
+                break;
+              case error.POSITION_UNAVAILABLE:
+                reason = "Location information is unavailable to Continue.!!";
+                break;
+              case error.TIMEOUT:
+                reason = "The request to get user location timed out,\nPlease Try Again.!!";
+                break;
+              case error.UNKNOWN_ERROR:
+                reason = "An unknown error occurred.";
+                break;
+            }
+            reject(reason); // Reject the promise on error
+          },
+          { maximumAge: 0, timeout: 5000, enableHighAccuracy: true }
+        );
+      } else {
+        reject("Geolocation is not supported by the browser to Continue.!!");
+      }
+    });
+  }
+</script>
+

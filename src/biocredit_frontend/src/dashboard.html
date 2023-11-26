@@ -1,0 +1,85 @@
+{% extends 'base2.html' %} {% block title %} Dashboard | BioCredit &#128594; {%
+endblock title %} {% block content%}
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGNsuw4kc63tho_qEVBWP0DLmunaSjzoU&callback=initMap&libraries=&v=weekly"
+  async
+></script>
+<div class="main-profile">
+  <div class="user-details">
+    <div class="user-profile">
+      <div class="user-image">
+        <picture>
+          <img
+            src="{{ url_for('static', filename='images/user-icon.png') }}"
+            alt="Profile-picture"
+            width="100px"
+          />
+        </picture>
+      </div>
+      <div class="user-general-details">
+        <p><strong>User Name :</strong> &nbsp; {{current_user.username}}</p>
+        <p><strong>Name :</strong> &nbsp; {{current_user.name}}</p>
+        <p><strong>Address :</strong> &nbsp; {{current_user.address}}</p>
+        <p>
+          <strong>Meter Location :</strong> &nbsp; {{current_user.latitude}},
+          {{current_user.longitude}}
+        </p>
+      </div>
+    </div>
+    <div class="user-qr">
+      <img src="{{qrcode.svg_data_uri(dark='#01fe34',light="#000000",
+      scale=4)}}" alt="User-QR">
+    </div>
+  </div>
+  <div id="mapdiv" class="user-location">
+
+  </div>
+  <script>
+
+    // Initialize and add the map
+    function initMap() {
+
+        // The location coordinates
+        const coordinates = {
+            lat: {{current_user.latitude}},
+            lng: {{current_user.longitude}}
+        };
+
+        // Create the map, centered at location coordinates
+        const map = new google.maps.Map(
+                document.getElementById("mapdiv"), {
+
+            // Set the zoom of the map
+            zoom: 15,
+            center: coordinates,
+        });
+
+        const marker = new google.maps.Marker({
+          position: coordinates,
+          map,
+          title: "{{current_user.username}}'s Meter Location",
+        });
+
+        let infowindow = new google.maps.InfoWindow({
+          content: "<b>{{current_user.username}}'s Meter Location</b>"
+        });
+        
+        google.maps.event.addListener(marker, "click", function() {
+          console.log(infowindow);
+          //infowindow.open(map,marker);
+          if(infowindow.anchor===undefined){
+            infowindow.open(map,marker);
+
+          }else{
+            infowindow.close();
+            infowindow = new google.maps.InfoWindow({
+              content: "<b>{{current_user.username}}'s Meter Location</b>"
+            });
+          }
+          console.log(infowindow);
+
+        });
+    }
+</script>
+</div>
+{% endblock content %}

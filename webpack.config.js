@@ -11,10 +11,25 @@ const frontendDirectory = "biocredit_frontend";
 
 const frontend_entry = path.join("src", frontendDirectory, "src", "index.html");
 
+// Define the path to your HTML files
+const htmlFiles = [
+  "index.html",
+  "register.html"
+  // Add more HTML files if needed
+  // "anotherPage.html",
+];
+
+const entryPoints = {};
+htmlFiles.forEach((file) => {
+  const entryName = path.parse(file).name;
+  entryPoints[entryName] = path.join(__dirname, "src", frontendDirectory, "src", file).replace(/\.html$/, ".js");
+});
+
 module.exports = {
   target: "web",
   mode: isDevelopment ? "development" : "production",
-  entry: {
+  entry: 
+  {
     // The frontend.entrypoint points to the HTML file for this build, so we need
     // to replace the extension to `.js`.
     index: path.join(__dirname, frontend_entry).replace(/\.html$/, ".js"),

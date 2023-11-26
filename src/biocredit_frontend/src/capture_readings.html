@@ -1,0 +1,323 @@
+{% extends 'base2.html' %} {% block title %} Dashboard | BioCredit &#128594; {% endblock title %} {%
+block content %}
+<h1 class="web-head">Capture Readings</h1>
+<div class="user_form">
+  {% if flag %}
+  <form
+    id="user-form"
+    action="/process_form"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <br /><br />
+    {% if role == 'superuser' %}
+    <li id="dropdown_">
+      <select name="selectedUser" id="selectedUser">
+        {% if user_list|length>0 %}
+        <option value=''>Select an User</option>
+        {% for user in user_list %}
+        <option value="{{ user.username }}" {% if selected!=None %} {% if selected==user.username %} selected {% endif %} {% endif %}>{{ user.username }}</option>
+        {% endfor %}
+        {% else %}
+        <option value="">All User's Readings are Taken For This Day.!!</option>
+        {% endif %}
+      </select>
+    </li>
+    {% else %}
+    <input type="hidden" name="selectedUser" id="selectedUser" />
+    {% endif %}
+    <span id="status" data-status style="display: none"></span>
+    <input
+      type="text"
+      name="reading"
+      placeholder="//Enter Meter Readings :"
+      id="reading"
+      autocomplete="off"
+    />
+    <input type="hidden" name="imgurl" id="captured_image" />
+
+    <br /><br />
+    <input id="org-sub" style="display: none" type="submit" value="Submit" />
+  </form>
+  <button
+    id="modalopen"
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+  >
+    Capture Image
+  </button>
+  <canvas id="imageCanvas" style="display: none"></canvas><br />
+  <button class="btn btn-primary" id="dup-sub">Submit</button>
+
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content" style="background-color: #000">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Capture Meter Image</h1>
+          <button
+            type="button btn btn-light"
+            id="close-up"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container" style="margin: auto" id="cameraContainer">
+            <video id="cameraPreview" style="display: block;margin:auto;" autoplay></video>
+          </div>
+          <canvas id="imageCanvas2" style="display: none"></canvas>
+        </div>
+        <div class="modal-footer">
+          <button id="captureBtn" class="btn btn-light">Capture Image</button>
+          <button id="retakeBtn" class="btn btn-light" style="display: none">
+            Retake
+          </button>
+          <button
+            type="button"
+            id="close-bottom"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Ok
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    {% if user_list==None %}
+    <h3>Today's Meter Reading is Submitted, Come Back Tomorrow.!!</h3>
+    {% else %}
+    <h3>Collection of all meter readings is Completed, Come Back Tomorrow.!!</h3>
+    {% endif %}
+  {% endif %}
+</div>
+<div
+  id="contoast"
+  data-count="0"
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+></div>
+<script src="{{ url_for('static', filename='webcam_capture.js') }}"></script>
+<script>
+    function createtoast(msg) {
+      var count = parseInt($("#contoast").attr("data-count"));
+      var toast =`<div id="liveToast` +count +`" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div style="background-color: #FFFFFF;color:#000000;" class="toast-header">  <img src="data:image/png;base64,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
+        " style="height:20px;width:auto;" class="rounded me-2" alt="...">  <strong class="me-auto" style="color:black;">>></strong>  <small style="color:black;margin-right:8px;">Just Now</small>  <button style="margin:0px!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div id='bo` +count +`' style="background-color: BLACK;COLOR: #01FE43;BORDER: 1PX SOLID;" class="toast-body">              </div>        </div>`;
+      // var mtoast =`<div id="mliveToast` +count +`" data-bs-autohide='false' data-bs-animation='true' data-bs-delay='2000' class="toast" role="alert" aria-live="assertive" aria-atomic="true">          <div style="background-color: #000000;color:#ffffff;" class="toast-header">            <img src="data:image/png;base64,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
+        // " style="height:20px;width:auto;" class="rounded me-2" alt="...">            <strong class="me-auto">>></strong>            <small>Just Now</small>            <button style="color:while!important;" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>          </div>          <div id='mbo` +count +`' class="toast-body">              </div>        </div>`;
+      $("#contoast").html($("#contoast").html() + toast);
+      // $("#mcontoast").html($("#mcontoast").html() + mtoast);
+      bo = document.getElementById("bo" + count);
+      bo.innerHTML = msg;
+      // mbo = document.getElementById("mbo" + count);
+      // mbo.innerHTML = msg;
+      $("#liveToast" + count).addClass("fade show");
+      // $("#mliveToast" + count).addClass("fade show");
+      count++;
+      $("#contoast").attr("data-count", count);
+      count--;
+      setTimeout(function (e) {
+        $("#liveToast" + count).toast("hide");
+      }, 8000);
+      // setTimeout(function (e) {
+      //   $("#mliveToast" + count).toast("hide");
+      // }, 8000);
+    }
+
+    const usernameSelect = document.getElementById("username");
+    const selectedUserInput = document.getElementById("selectedUser");
+    const org_btn=document.getElementById('org-sub');
+    const dup_btn=document.getElementById('dup-sub');
+    let latitude=null,longitude=null,accuracy=null;
+
+
+
+    if(usernameSelect){
+    usernameSelect.addEventListener("change", function () {
+      selectedUserInput.value = this.value;
+    });
+  }
+  {% if msg!=None %}
+  createtoast("{{msg}}");
+  {% endif %}
+
+  async function getLocationAsync() {
+      return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              if (position.coords.accuracy <= 200) {
+                latitude=position.coords.latitude;
+                longitude=position.coords.longitude;
+                accuracy=position.coords.accuracy;
+                resolve();
+              } else {
+                reject(
+                  "Your Location Accuracy is "+position.coords.accuracy+" meters\n Please Make your Location accurate less than 200 meters.!!"
+                );
+              }
+            },
+            (error) => {
+              let reason;
+              switch (error.code) {
+                case error.PERMISSION_DENIED:
+                  reason = "Please Allow the Location Permission to Continue.!!";
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                  reason = "Location information is unavailable to Continue.!!";
+                  break;
+                case error.TIMEOUT:
+                  reason = "The request to get user location timed out,\nPlease Try Again.!!";
+                  break;
+                case error.UNKNOWN_ERROR:
+                  reason = "An unknown error occurred.";
+                  break;
+              }
+              reject(reason); // Reject the promise on error
+            },
+            { maximumAge: 0, timeout: 5000, enableHighAccuracy: true }
+          );
+        } else {
+          reject("Geolocation is not supported by the browser to Continue.!!");
+        }
+      });
+    }
+
+    let watch;
+
+    function watchLocation(){
+      watch=navigator.geolocation.watchPosition(HandlePosition,HandleError,{ maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
+    }
+
+    function closeWatchLocation(){
+      navigator.geolocation.clearWatch(watch);
+    }
+
+    function HandlePosition(position){
+      console.log(position.coords);
+      if (position.coords.accuracy <= 200) {
+        latitude=position.coords.latitude;
+        longitude=position.coords.longitude;
+        accuracy=position.coords.accuracy;
+        $('#status').val('success');
+        closeWatchLocation();
+        createtoast("Location Captured Successfully.!!");
+      }
+      else{
+        $('#status').val('Finding Accurate Location, Please Wait.!!');
+      }
+    }
+
+    function HandleError(error){
+      let reason = '';
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          reason = "Please Allow the Location Permission to Continue.!!";
+          createtoast(reason)
+          break;
+        case error.POSITION_UNAVAILABLE:
+          reason = "Location information is unavailable to Continue.!!";
+          break;
+        case error.TIMEOUT:
+          reason = "The request to get user location timed out,\nPlease Try Again.!!";
+          break;
+        case error.UNKNOWN_ERROR:
+          reason = "An unknown error occurred.";
+          break;
+      }
+      $('#status').val(reason);
+    }
+
+    watchLocation();
+
+    dup_btn.addEventListener('click',async function(event){
+
+      //await getLocationAsync().catch((error)=>{
+      //  createtoast(error);
+      //  return;
+      //});
+
+        
+
+        var selecteduser=document.getElementById('selectedUser');
+      {% if role == 'superuser' %}
+
+        if(!selecteduser.value){
+          selecteduser.focus();
+          createtoast('Select a Valid User.!!');
+          return;
+        }
+      {% endif %}
+      var captured_image=document.getElementById('captured_image');
+        if(!captured_image.value){
+          captured_image.focus();
+          createtoast('Capture Meter Image To Submit The Form.!!');
+          return;
+        }
+        var reading=document.getElementById('reading');
+        if(!reading.value){
+          reading.focus()
+          createtoast('Enter Meter Reading To Submit The Form.!!');
+          return;
+        }
+
+        if(!latitude || !longitude || !accuracy){
+          createtoast($("#status").val());
+          return;
+          }
+
+        $.ajax({
+          url:"{{BASE_URL}}process_form",
+          type:"POST",
+          contentType: 'application/json;charset=UTF-8',
+          data:JSON.stringify({'reading':reading.value,'imgurl':captured_image.value,'selectedUser':selecteduser.value,'latitude':latitude,'longitude':longitude,'accuracy':accuracy}),
+
+          success:function(data){
+            if(data.statusCode===200){
+              window.location.href="{{BASE_URL}}capture_readings?msg="+encodeURIComponent(data.msg);
+            }
+            else{
+              createtoast(data.msg);
+            }
+          }
+        });
+    });
+
+    $(document).ready(function(e){
+      {% if role!='user' %}
+      if($('#selectedUser')){
+        $('#selectedUser').select2();
+      }
+      {% endif %}
+      async function checkLocationPermission() {
+        try {
+          const permissionStatus = await navigator.permissions.query({ name: 'geolocation' });
+
+          if (permissionStatus.state === 'granted') {
+            console.log('Location permission granted');
+          } else if (permissionStatus.state === 'prompt') {
+            createtoast('Allow above Location permission prompt to Continue.!!');
+          } else if (permissionStatus.state === 'denied') {
+            createtoast('Allow Location Permission to Continue.!!');
+          }
+        } catch (error) {
+          console.error('Error checking location permission:', error);
+        }
+      }
+      checkLocationPermission();
+    });
+</script>
+{% endblock content %}
